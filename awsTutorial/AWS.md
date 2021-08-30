@@ -171,3 +171,4 @@ SAM uses CodeDeploy and rollbacks are possible
 GenerateDataKey returns a plaintext and encrypted data key. Use the plain text key to encrypt the data then delete it
 
 ---
+The default timeout for lambda is 3 seconds. The maximum allowed value is 900 seconds(15 min).
