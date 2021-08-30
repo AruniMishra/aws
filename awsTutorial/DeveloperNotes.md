@@ -1,4 +1,3 @@
-Here’s the notes that I jotted down while prepping for this exam:
 
 -   DynamoDB:
 
