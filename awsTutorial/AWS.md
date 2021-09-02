@@ -107,6 +107,20 @@ High resolution, with data at a granularity of one second
 
 Data at rest == KMS, audit== KMS
 
+    A ) Server-Side Encryption
+
+    SSE-S3 (AWS-Managed Keys) => When the requirement is to keep the encryption work simple and minimise the maintenance overhead then use SSE-S3.
+
+    SSE-KMS (AWS KMS Keys) => When the requirement is to maintain a security audit trail then use SSE-KMS Keys.
+
+    SSE-C (Customer-Provided Keys) => When end-to-end encryption is not required and the client wants full control of his/her security keys, then use SSE-C.
+
+    B) Client-Side Encryption
+
+    AWS KMS-managed, customer master key => When the requirement is to maintain end-to-end encryption plus a security audit trail, then use AWS KMS Keys.
+
+    Client Managed Master Key => When the requirement is to maintain end-to-end encryption but the client wants full control of his/her security keys, then use Client Managed Master Key.
+
 ---
 
 a global secondary index (GSI) is primarily used if you want to query over the entire table, across all partitions. GSI only supports eventual consistency and not strong consistency.
