@@ -186,3 +186,8 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 
 ---
 The default timeout for lambda is 3 seconds. The maximum allowed value is 900 seconds(15 min).
+
+----
+With short polling, if you polled SQS every 10s, you'd only receive a message every 10s, assuming a message is available. e.g. If the message landed in the queue at 15s after the 1st short poll (0s), you'd receive the message at the 3rd short poll at 20s.
+However, if you used long polling, the *connection stays open* to SQS until a message has been found in SQS, or until the timeout (e.g. max 20s) is reached, e.g. If the message landed in the queue at 15s after the 1st LONG poll (0s), the message is returned to the client at 15s. If no message is received, the connection times out at 20s, and a new connection is established.
+(also, any timeout over 0s implies long polling)
