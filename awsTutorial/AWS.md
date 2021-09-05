@@ -86,8 +86,6 @@ Step #3 To get the number of eventual consistency requests, just divide the resu
 - A Developer is trying to deploy a serverless application using AWS CodeDeploy. The application was updated and needs to be redeployed.
   What file does the Developer need to update to push that change through CodeDeploy?- appspec.yml
 
----
-
 # Cloud watch
 
 - Standard resolution, with data having a one-minute granularity
@@ -131,8 +129,6 @@ NONE — no write capacity details are returned. (This is the default.)
 
 - You can also use metrics to determine which are your “hot” or “cold” shards, that is, shards that are receiving much more data, or much less data, than expected. You could then selectively split the hot shards to increase capacity for the hash keys that target those shards. Similarly, you could merge cold shards to make better use of their unused capacity.
 
-# SQS
-
 # Cloudformation
 
 - Cloudformation does not have the rollback feature :
@@ -144,10 +140,6 @@ NONE — no write capacity details are returned. (This is the default.)
 ---
 
 GenerateDataKey returns a plaintext and encrypted data key. Use the plain text key to encrypt the data then delete it
-
----
-
----
 
 # SQS
 
