@@ -14,6 +14,8 @@ spread – Place tasks evenly based on the specified value. Accepted values are 
 
 - a global secondary index (GSI) is primarily used if you want to query over the entire table, across all partitions. GSI only supports eventual consistency and not strong consistency.
 
+- Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
+
 # VPC
 
 - default route limit per VPC is 200.
@@ -93,24 +95,6 @@ Step #3 To get the number of eventual consistency requests, just divide the resu
 
 ---
 
-Data at rest == KMS, audit== KMS
-
-    A ) Server-Side Encryption
-
-    SSE-S3 (AWS-Managed Keys) => When the requirement is to keep the encryption work simple and minimise the maintenance overhead then use SSE-S3.
-
-    SSE-KMS (AWS KMS Keys) => When the requirement is to maintain a security audit trail then use SSE-KMS Keys.
-
-    SSE-C (Customer-Provided Keys) => When end-to-end encryption is not required and the client wants full control of his/her security keys, then use SSE-C.
-
-    B) Client-Side Encryption
-
-    AWS KMS-managed, customer master key => When the requirement is to maintain end-to-end encryption plus a security audit trail, then use AWS KMS Keys.
-
-    Client Managed Master Key => When the requirement is to maintain end-to-end encryption but the client wants full control of his/her security keys, then use Client Managed Master Key.
-
----
-
 To return the number of write capacity units consumed by any of these operations, set the ReturnConsumedCapacity parameter to one of the following:
 
 TOTAL — returns the total number of write capacity units consumed.
@@ -155,7 +139,24 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 
 - AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more
 
-
 # S3
 
 - The upload size limit for one file is 5GB. But using the multi part upload, this size increases dramatically to 5TB
+
+- Data at rest == KMS, audit== KMS
+
+- Encryption
+
+      A ) Server-Side Encryption
+
+      SSE-S3 (AWS-Managed Keys) => When the requirement is to keep the encryption work simple and minimise the maintenance overhead then use SSE-S3.
+
+      SSE-KMS (AWS KMS Keys) => When the requirement is to maintain a security audit trail then use SSE-KMS Keys.
+
+      SSE-C (Customer-Provided Keys) => When end-to-end encryption is not required and the client wants full control of his/her security keys, then use SSE-C.
+
+      B) Client-Side Encryption
+
+      AWS KMS-managed, customer master key => When the requirement is to maintain end-to-end encryption plus a security audit trail, then use AWS KMS Keys.
+
+      Client Managed Master Key => When the requirement is to maintain end-to-end encryption but the client wants full control of his/her security keys, then use Client Managed Master Key.
