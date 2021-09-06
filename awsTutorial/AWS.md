@@ -154,3 +154,8 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 # AppSync
 
 - AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more
+
+
+# S3
+
+- The upload size limit for one file is 5GB. But using the multi part upload, this size increases dramatically to 5TB
