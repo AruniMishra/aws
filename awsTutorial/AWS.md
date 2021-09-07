@@ -108,6 +108,8 @@ NONE — no write capacity details are returned. (This is the default.)
 
 - SAM uses CodeDeploy and rollbacks are possible
 
+- Changes to a deployment package in Amazon S3 are not detected automatically during stack updates. To update the function code, change the object key or version in the template. https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html
+
 # SQS
 
 - Polling
