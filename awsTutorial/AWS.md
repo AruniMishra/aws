@@ -16,6 +16,21 @@ spread – Place tasks evenly based on the specified value. Accepted values are 
 
 - Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
 
+- RCU
+
+      Step #1 Multiply the value of the provisioned RCU by 4 KB
+      = 10 RCU x 4 KB
+      = 40
+
+      Step #2 To get the number of strong consistency requests, just divide the result of step 1 to 4 KB
+      Divide the Average Item Size by 4 KB since the scenario requires eventual consistency reads:
+      = 40 / 4 KB
+      = 10 strongly consistent reads requests
+
+      Step #3 To get the number of eventual consistency requests, just divide the result of step 1 to 2 KB
+      =40 / 2 KB
+      = 20 eventually consistent read requests
+
 # VPC
 
 - default route limit per VPC is 200.
@@ -28,27 +43,6 @@ Use AWS Cognito Identity Pools then enable access to unauthenticated identities.
 
 ---
 
-Step #1 Multiply the value of the provisioned RCU by 4 KB
-
-```code
-= 10 RCU x 4 KB
-
-= 40
-
-Step #2 To get the number of strong consistency requests, just divide the result of step 1 to 4 KB
-
-Divide the Average Item Size by 4 KB since the scenario requires eventual consistency reads:
-
-= 40 / 4 KB
-
-= 10 strongly consistent reads requests
-
-Step #3 To get the number of eventual consistency requests, just divide the result of step 1 to 2 KB
-
-=40 / 2 KB
-
-= 20 eventually consistent read requests
-```
 
 # API Gateway
 
@@ -147,7 +141,7 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 
 - Encryption
 
-      A ) Server-Side Encryption
+      A) Server-Side Encryption
 
       SSE-S3 (AWS-Managed Keys) => When the requirement is to keep the encryption work simple and minimise the maintenance overhead then use SSE-S3.
 
@@ -160,3 +154,7 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
       AWS KMS-managed, customer master key => When the requirement is to maintain end-to-end encryption plus a security audit trail, then use AWS KMS Keys.
 
       Client Managed Master Key => When the requirement is to maintain end-to-end encryption but the client wants full control of his/her security keys, then use Client Managed Master Key.
+
+
+# ECS
+- PortMapping be defined in *Task definition* when launching containers in Amazon ECS
