@@ -10,6 +10,8 @@
 
 - Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
 
+- perform ordered data replication between applications by using Amazon DynamoDB Streams
+
 - RCU
 
       Step #1 Multiply the value of the provisioned RCU by 4 KB
@@ -106,10 +108,6 @@ NONE — no write capacity details are returned. (This is the default.)
 
 - SAM uses CodeDeploy and rollbacks are possible
 
----
-
-GenerateDataKey returns a plaintext and encrypted data key. Use the plain text key to encrypt the data then delete it
-
 # SQS
 
 - Polling
@@ -130,6 +128,8 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 
 - The upload size limit for one file is 5GB. But using the multi part upload, this size increases dramatically to 5TB
 
+# KMS
+
 - Data at rest == KMS, audit== KMS
 
 - Encryption
@@ -147,6 +147,8 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
       AWS KMS-managed, customer master key => When the requirement is to maintain end-to-end encryption plus a security audit trail, then use AWS KMS Keys.
 
       Client Managed Master Key => When the requirement is to maintain end-to-end encryption but the client wants full control of his/her security keys, then use Client Managed Master Key.
+
+- GenerateDataKey returns a plaintext and encrypted data key. Use the plain text key to encrypt the data then delete it
 
 # ECS
 
