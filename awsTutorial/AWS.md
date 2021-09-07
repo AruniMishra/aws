@@ -1,11 +1,3 @@
-binpack – Place tasks based on the least available amount of CPU or memory. This minimizes the number of instances in use.
-
-random – Place tasks randomly.
-
-spread – Place tasks evenly based on the specified value. Accepted values are attribute key-value pairs, instanceId, or host.
-
----
-
 # DynamoDB
 
 - Enable DynamoDB Streams and set the value of StreamViewType to NEW_IMAGE. Use Kinesis Adapter in the application to consume streams from DynamoDB
@@ -13,6 +5,8 @@ spread – Place tasks evenly based on the specified value. Accepted values are 
 - If you enable DynamoDB Streams on a table, you can associate the stream ARN with a Lambda function that you write. Immediately after an item in the table is modified, a new record appears in the table’s stream. AWS Lambda polls the stream and invokes your Lambda function synchronously when it detects new stream records.
 
 - a global secondary index (GSI) is primarily used if you want to query over the entire table, across all partitions. GSI only supports eventual consistency and not strong consistency.
+
+- Partition key of the Local Secondary Index must me the same as the one in a base table.
 
 - Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
 
@@ -37,11 +31,9 @@ spread – Place tasks evenly based on the specified value. Accepted values are 
 - a subnet can only be associated with one route table at a time.
 - it is definitely possible to modify/edit the main route table.
 
----
+# AWS Cognito
 
-Use AWS Cognito Identity Pools then enable access to unauthenticated identities.
-
----
+- Use AWS Cognito Identity Pools then enable access to unauthenticated identities.
 
 # API Gateway
 
@@ -159,3 +151,11 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 # ECS
 
 - PortMapping be defined in _Task definition_ when launching containers in Amazon ECS
+
+- ECS task placement strategies
+
+      binpack – Place tasks based on the least available amount of CPU or memory. This minimizes the number of instances in use.
+
+      random – Place tasks randomly.
+
+      spread – Place tasks evenly based on the specified value. Accepted values are attribute key-value pairs, instanceId, or host.
