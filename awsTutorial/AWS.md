@@ -43,7 +43,6 @@ Use AWS Cognito Identity Pools then enable access to unauthenticated identities.
 
 ---
 
-
 # API Gateway
 
 - Use the GetTraceSummaries API to get the list of trace IDs of the application and then retrieve the list of traces using BatchGetTraces API.
@@ -129,6 +128,8 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 
 - Unlike standard queues, FIFO queues don’t introduce duplicate messages. FIFO queues help you avoid sending duplicates to a queue. If you retry the SendMessage action within the 5-minute deduplication interval, Amazon SQS doesn’t introduce any duplicates into the queue.
 
+- Delay queues are similar to visibility timeouts because both features make messages unavailable to consumers for a specific period of time. The difference between the two is that, for delay queues, a message is hidden when it is first added to queue, whereas for visibility timeouts a message is hidden only after it is consumed from the queue.
+
 # AppSync
 
 - AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more
@@ -155,6 +156,6 @@ GenerateDataKey returns a plaintext and encrypted data key. Use the plain text k
 
       Client Managed Master Key => When the requirement is to maintain end-to-end encryption but the client wants full control of his/her security keys, then use Client Managed Master Key.
 
-
 # ECS
-- PortMapping be defined in *Task definition* when launching containers in Amazon ECS
+
+- PortMapping be defined in _Task definition_ when launching containers in Amazon ECS
