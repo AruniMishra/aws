@@ -10,7 +10,9 @@
 
 - Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
 
-- perform ordered data replication between applications by using Amazon DynamoDB Streams
+- perform ordered data replication between applications by using Amazon DynamoDB Stream
+      
+      simplest, decoupled, and reliable method to get near-real time updates from the database
 
 - RCU
 
