@@ -1,3 +1,9 @@
+# IAM
+
+- manage users and authorization
+  - Cognito user pool -> To change password
+  - Identity pool -> To access AWS services
+
 # DynamoDB
 
 - Enable DynamoDB Streams and set the value of StreamViewType to NEW_IMAGE. Use Kinesis Adapter in the application to consume streams from DynamoDB
@@ -11,7 +17,7 @@
 - Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
 
 - perform ordered data replication between applications by using Amazon DynamoDB Stream
-      
+
       simplest, decoupled, and reliable method to get near-real time updates from the database
 
 - RCU
