@@ -80,8 +80,7 @@
 
 # AWS CodeDeploy
 
-- A Developer is trying to deploy a serverless application using AWS CodeDeploy. The application was updated and needs to be redeployed.
-  What file does the Developer need to update to push that change through CodeDeploy?- appspec.yml
+- A Developer is trying to deploy a serverless application using AWS CodeDeploy. The application was updated and needs to be redeployed. What file does the Developer need to update to push that change through CodeDeploy?- appspec.yml
 
 # Cloud watch
 
