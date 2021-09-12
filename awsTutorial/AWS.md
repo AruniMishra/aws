@@ -70,9 +70,11 @@
 - when your function returns an error, Lambda stops processing any data in the impacted shard and retries the entire batch of records. These records are continuously retried until they are successfully processed by Lambda or expired by the event source.
   [ref](https://aws.amazon.com/about-aws/whats-new/2019/11/aws-lambda-supports-failure-handling-features-for-kinesis-and-dynamodb-event-sources/?nc1=h_ls)
 
-- Each Lambda function receives 500MB of non-persistent disk space in its own /tmp directory.
+- Each Lambda function receives 512MB of non-persistent disk space in its own /tmp directory.
 
 - The default timeout for lambda is 3 seconds. The maximum allowed value is 900 seconds(15 min).
+
+- Create an event source mapping to tell Lambda to send records from your stream to a Lambda function. You can create multiple event source mappings to process the same data with multiple Lambda functions, or process items from multiple streams with a single function.
 
 # Elastic Beanstalk
 
