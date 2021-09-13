@@ -59,6 +59,8 @@
 
 - The API Gateway automatically enabled throttling in peak times which caused the HTTP 504 errors is incorrect because a large number of incoming requests will most likely produce an HTTP 502 or 429 error but not a 504 error
 
+- you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API.
+
 - Lambda authorizer
 
       A Lambda authorizer is an API Gateway feature that uses a Lambda function to control access to your API. When a client makes a request to one of your API’s methods, API Gateway calls your Lambda authorizer, which takes the caller’s identity as input and returns an IAM policy as output.
@@ -168,9 +170,9 @@ NONE — no write capacity details are returned. (This is the default.)
 - You can choose to have AWS KMS automatically rotate CMKs every year, provided that those keys were generated within AWS KMS HSMs. Automatic key rotation is not supported for imported keys, asymmetric keys, or keys generated in an AWS CloudHSM cluster using the AWS KMS custom key store feature. If you choose to import keys to AWS KMS or asymmetric keys or use a custom key store, you can manually rotate them by creating a new CMK and mapping an existing key alias from the old CMK to the new CMK.
 
       Unsupported CMK types: Automatic key rotation is not supported on the following types of CMKs, but you can rotate these CMKs manually.
-      - Asymmetric CMKs
-      - CMKs in custom key stores
-      - CMKs that have imported key material
+      - Asymmetric KMS keys
+      - KMS keys in custom key stores (backed by AWS CloudHSM clusters)
+      - KMS keys that have imported key material
 
 # ECS
 
