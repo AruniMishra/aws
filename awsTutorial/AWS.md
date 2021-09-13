@@ -20,6 +20,10 @@
 
       simplest, decoupled, and reliable method to get near-real time updates from the database
 
+- DynamoDB optionally supports conditional writes for these operations. A conditional write succeeds only if the item attributes meet one or more expected conditions. Otherwise, it returns an error. Conditional writes are helpful in many situations. For example, you might want a PutItem operation to succeed only if there is not already an item with the same primary key. Or you could prevent an UpdateItem operation from modifying an item if one of its attributes has a certain value.
+
+      Conditional writes are helpful in cases where multiple users attempt to modify the same item.
+
 - RCU
 
       Step #1 Multiply the value of the provisioned RCU by 4 KB
@@ -161,6 +165,13 @@ NONE — no write capacity details are returned. (This is the default.)
 
 - GenerateDataKey returns a plaintext and encrypted data key. Use the plain text key to encrypt the data then delete it
 
+- You can choose to have AWS KMS automatically rotate CMKs every year, provided that those keys were generated within AWS KMS HSMs. Automatic key rotation is not supported for imported keys, asymmetric keys, or keys generated in an AWS CloudHSM cluster using the AWS KMS custom key store feature. If you choose to import keys to AWS KMS or asymmetric keys or use a custom key store, you can manually rotate them by creating a new CMK and mapping an existing key alias from the old CMK to the new CMK.
+
+      Unsupported CMK types: Automatic key rotation is not supported on the following types of CMKs, but you can rotate these CMKs manually.
+      - Asymmetric CMKs
+      - CMKs in custom key stores
+      - CMKs that have imported key material
+
 # ECS
 
 - PortMapping be defined in _Task definition_ when launching containers in Amazon ECS
@@ -172,3 +183,7 @@ NONE — no write capacity details are returned. (This is the default.)
       random – Place tasks randomly.
 
       spread – Place tasks evenly based on the specified value. Accepted values are attribute key-value pairs, instanceId, or host.
+
+# X Ray
+
+- Use annotations to record information on segments or subsegments that you want indexed for search.
