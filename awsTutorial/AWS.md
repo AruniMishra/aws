@@ -1,8 +1,11 @@
 # IAM
 
 - manage users and authorization
+
   - Cognito user pool -> To change password
   - Identity pool -> To access AWS services
+
+- you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API
 
 # DynamoDB
 
@@ -39,6 +42,8 @@
       =40 / 2 KB
       = 20 eventually consistent read requests
 
+- A projection expression is a string that identifies the attributes you want. To retrieve a single attribute, specify its name. For multiple attributes, the names must be comma-separated.
+
 # VPC
 
 - default route limit per VPC is 200.
@@ -54,6 +59,12 @@
 - Use the GetTraceSummaries API to get the list of trace IDs of the application and then retrieve the list of traces using BatchGetTraces API.
 
 - Using stage variables that can be configured, an API deployment stage can interact with different backend endpoints. Users can use API Gateway stage variables to reference a single AWS Lambda function with multiple versions and aliases
+
+- The following are the Gateway response types which are associated with the HTTP 504 error in API Gateway:
+
+      INTEGRATION_FAILURE – The gateway response for an integration failed error. If the response type is unspecified, this response defaults to the DEFAULT_5XX type.
+
+      INTEGRATION_TIMEOUT – The gateway response for an integration timed out error. If the response type is unspecified, this response defaults to the DEFAULT_5XX type.
 
 - For the integration timeout, the range is from 50 milliseconds to 29 seconds for all integration types, including Lambda, Lambda proxy, HTTP, HTTP proxy, and AWS integrations. the underlying Lambda function has been running for more than 29 seconds causing the API Gateway request to time out.
 
@@ -173,6 +184,10 @@ NONE — no write capacity details are returned. (This is the default.)
       - Asymmetric KMS keys
       - KMS keys in custom key stores (backed by AWS CloudHSM clusters)
       - KMS keys that have imported key material
+
+- An error occurred (AccessDenied) when calling the PutObject operation: Access Denied"
+
+      Add permission to the kms:GenerateDataKey action. This permission is required for buckets that use default encryption with a custom AWS KMS key.
 
 # ECS
 
