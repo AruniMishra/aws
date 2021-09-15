@@ -21,8 +21,8 @@
 
 - manage users and authorization
 
-  - Cognito user pool -> To change password
-  - Identity pool -> To access AWS services
+  * Cognito user pool -> To change password
+  * Identity pool -> To access AWS services
 
 - you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API
 
