@@ -16,7 +16,6 @@
 - [16. ECS](#16-ecs)
 - [17. X Ray](#17-x-ray)
 
-
 ---
 # 1. IAM
 
@@ -63,14 +62,14 @@
       = 20 eventually consistent read requests
 
 - A projection expression is a string that identifies the attributes you want. To retrieve a single attribute, specify its name. For multiple attributes, the names must be comma-separated.
-- ReturnConsumedCapacity
-  - To return the number of write capacity units consumed by any of these operations, set the ReturnConsumedCapacity parameter to one of the following:
 
-            TOTAL — returns the total number of write capacity units consumed.
+- ReturnConsumedCapacity: To return the number of write capacity units consumed by any of these operations, set the ReturnConsumedCapacity parameter to one of the following:
 
-            INDEXES — returns the total number of write capacity units consumed, with subtotals for the table and any secondary indexes that were affected by the operation.
+      TOTAL — returns the total number of write capacity units consumed.
 
-            NONE — no write capacity details are returned. (This is the default.)
+      INDEXES — returns the total number of write capacity units consumed, with subtotals for the table and any secondary indexes that were affected by the operation.
+
+      NONE — no write capacity details are returned. (This is the default.)
 
 # 3. VPC
 
