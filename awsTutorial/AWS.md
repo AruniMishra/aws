@@ -18,8 +18,7 @@
   - [15. KMS](#15-kms)
   - [16. ECS](#16-ecs)
   - [17. X Ray](#17-x-ray)
-
----
+  - [18. Amazon ElastiCache](#18-amazon-elasticache)
 
 ## 1. IAM
 
@@ -171,6 +170,8 @@
 
 - Delay queues are similar to visibility timeouts because both features make messages unavailable to consumers for a specific period of time. The difference between the two is that, for delay queues, a message is hidden when it is first added to queue, whereas for visibility timeouts a message is hidden only after it is consumed from the queue.
 
+- Long polling helps reduce the cost of using Amazon SQS by eliminating the number of empty responses (when there are no messages available for a ReceiveMessage request) and false empty responses (when messages are available but aren’t included in a response). This type of polling is suitable if the new messages that are being added to the SQS queue arrive less frequently.
+
 ## 13. AppSync
 
 - AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more
@@ -227,3 +228,7 @@
 ## 17. X Ray
 
 - Use annotations to record information on segments or subsegments that you want indexed for search.
+
+## 18. Amazon ElastiCache
+
+- Lazy Loading, as its name implies, is a caching strategy that loads data into the cache only when necessary.
