@@ -1,26 +1,28 @@
 # AWS Cheat sheet
 
 - [AWS Cheat sheet](#aws-cheat-sheet)
-  - [1. IAM](#1-iam)
-  - [2. DynamoDB](#2-dynamodb)
-  - [3. VPC](#3-vpc)
-  - [4. AWS Cognito](#4-aws-cognito)
-  - [5. API Gateway](#5-api-gateway)
-  - [6. Lambda](#6-lambda)
-  - [7. Elastic Beanstalk](#7-elastic-beanstalk)
-  - [8. AWS CodeDeploy](#8-aws-codedeploy)
-  - [9. Cloud watch](#9-cloud-watch)
-  - [10. Kinesis](#10-kinesis)
-  - [11. Cloudformation](#11-cloudformation)
-  - [12. SQS](#12-sqs)
-  - [13. AppSync](#13-appsync)
-  - [14. S3](#14-s3)
-  - [15. KMS](#15-kms)
-  - [16. ECS](#16-ecs)
-  - [17. X Ray](#17-x-ray)
-  - [18. Amazon ElastiCache](#18-amazon-elasticache)
+  - [IAM](#iam)
+  - [DynamoDB](#dynamodb)
+  - [VPC](#vpc)
+  - [AWS Cognito](#aws-cognito)
+  - [API Gateway](#api-gateway)
+  - [Lambda](#lambda)
+  - [Elastic Beanstalk](#elastic-beanstalk)
+  - [AWS CodeDeploy](#aws-codedeploy)
+  - [Cloud watch](#cloud-watch)
+  - [Kinesis](#kinesis)
+  - [Cloudformation](#cloudformation)
+  - [CodeCommit](#codecommit)
+  - [Codedeploy](#codedeploy)
+  - [SQS](#sqs)
+  - [AppSync](#appsync)
+  - [S3](#s3)
+  - [KMS](#kms)
+  - [ECS](#ecs)
+  - [X Ray](#x-ray)
+  - [Amazon ElastiCache](#amazon-elasticache)
 
-## 1. IAM
+## IAM
 
 - manage users and authorization
 
@@ -29,7 +31,7 @@
 
 - you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API
 
-## 2. DynamoDB
+## DynamoDB
 
 - Enable DynamoDB Streams and set the value of StreamViewType to NEW_IMAGE. Use Kinesis Adapter in the application to consume streams from DynamoDB
 
@@ -74,17 +76,17 @@
 
       NONE — no write capacity details are returned. (This is the default.)
 
-## 3. VPC
+## VPC
 
 - default route limit per VPC is 200.
 - a subnet can only be associated with one route table at a time.
 - it is definitely possible to modify/edit the main route table.
 
-## 4. AWS Cognito
+## AWS Cognito
 
 - Use AWS Cognito Identity Pools then enable access to unauthenticated identities.
 
-## 5. API Gateway
+## API Gateway
 
 - Use the GetTraceSummaries API to get the list of trace IDs of the application and then retrieve the list of traces using BatchGetTraces API.
 
@@ -112,7 +114,7 @@
 
       – A request parameter-based Lambda authorizer (also called a REQUEST authorizer) receives the caller’s identity in a combination of headers, query string parameters, stageVariables, and $context variables
 
-## 6. Lambda
+## Lambda
 
 - when your function returns an error, Lambda stops processing any data in the impacted shard and retries the entire batch of records. These records are continuously retried until they are successfully processed by Lambda or expired by the event source.
   [ref](https://aws.amazon.com/about-aws/whats-new/2019/11/aws-lambda-supports-failure-handling-features-for-kinesis-and-dynamodb-event-sources/?nc1=h_ls)
@@ -123,22 +125,22 @@
 
 - Create an event source mapping to tell Lambda to send records from your stream to a Lambda function. You can create multiple event source mappings to process the same data with multiple Lambda functions, or process items from multiple streams with a single function.
 
-## 7. Elastic Beanstalk
+## Elastic Beanstalk
 
 - configuration files are YAML- or JSON-formatted documents with a .config file extension that you place in a folder named .ebextensions and deploy in your application source bundle-as the healthcheckurl.yaml file should be renamed to healthcheckurl.config file and placed in the .ebextensions directory to be picked up by Elastic Beanstalk.
 
 - You can define periodic tasks in a file named cron.yaml in your source bundle to add jobs to your worker environment’s queue automatically at a regular interval.
 
-## 8. AWS CodeDeploy
+## AWS CodeDeploy
 
 - A Developer is trying to deploy a serverless application using AWS CodeDeploy. The application was updated and needs to be redeployed. What file does the Developer need to update to push that change through CodeDeploy?- appspec.yml
 
-## 9. Cloud watch
+## Cloud watch
 
 - Standard resolution, with data having a one-minute granularity
 - High resolution, with data at a granularity of one second
 
-## 10. Kinesis
+## Kinesis
 
 - For Lambda functions that process Kinesis or DynamoDB streams, the number of shards is the unit of concurrency. If your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently. This is because Lambda processes each shard’s events in sequence.
 
@@ -148,7 +150,13 @@
 
 - You can also use metrics to determine which are your “hot” or “cold” shards, that is, shards that are receiving much more data, or much less data, than expected. You could then selectively split the hot shards to increase capacity for the hash keys that target those shards. Similarly, you could merge cold shards to make better use of their unused capacity.
 
-## 11. Cloudformation
+- Duplication:
+  - Producer Retries
+    - Applications that need strict guarantees should embed a primary key within the record to remove duplicates later when processing.
+  - Consumer Retries
+    - checkpoint by specifying Last-Sequence-Num
+
+## Cloudformation
 
 - Cloudformation does not have the rollback feature :  
   - A stack goes into the UPDATE_ROLLBACK_FAILED state when AWS CloudFormation cannot roll back all changes during an update
@@ -158,7 +166,23 @@
 
 - Changes to a deployment package in Amazon S3 are not detected automatically during stack updates. To update the function code, change the object key or version in the [template](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-lambda-function-code.html).
 
-## 12. SQS
+## CodeCommit
+
+- With Git credentials, you generate a static user name and password in IAM. You then use these credentials for HTTPS connections with Git and any third-party tool that supports Git user name and password authentication. 
+- With SSH connections, you create public and private key files on your local machine that Git and CodeCommit use for SSH authentication. You associate the public key with your IAM user, and you store the private key on your local machine
+
+## Codedeploy
+
+- CodeDeploy provides two deployment type options, in-place deployments and blue/green deployments.
+  - In-place deployment
+    - Only deployments that use the EC2/On-Premises compute platform can use in-place deployments.
+  - Blue/green deployment
+    - Blue/green on an EC2/On-Premises compute platform
+    - Blue/green on an AWS Lambda compute platform.
+    - Blue/green on an Amazon ECS compute platform
+    - Blue/green deployments through AWS CloudFormation
+
+## SQS
 
 - Polling
 
@@ -172,15 +196,20 @@
 
 - Long polling helps reduce the cost of using Amazon SQS by eliminating the number of empty responses (when there are no messages available for a ReceiveMessage request) and false empty responses (when messages are available but aren’t included in a response). This type of polling is suitable if the new messages that are being added to the SQS queue arrive less frequently.
 
-## 13. AppSync
+## AppSync
 
 - AWS AppSync is a fully managed service that makes it easy to develop GraphQL APIs by handling the heavy lifting of securely connecting to data sources like AWS DynamoDB, Lambda, and more
 
-## 14. S3
+## S3
 
 - The upload size limit for one file is 5GB. But using the multi part upload, this size increases dramatically to 5TB
+- To perform a multipart upload with encryption using an AWS KMS key, the requester must have **kms:GenerateDataKey** and **kms:Decrypt** permissions
+  
+  The kms:GenerateDataKey permissions allow the requester to initiate the upload. With kms:Decrypt permissions, newly uploaded parts can be encrypted with the same key used for previous parts of the same object.
 
-## 15. KMS
+      Note: After all the parts are uploaded successfully, the uploaded parts must be assembled to complete the multipart upload operation. Because the uploaded parts are server-side encrypted using a KMS key, object parts must be decrypted before they can be assembled. For this reason, the requester must have kms:Decrypt permissions for multipart upload requests using server-side encryption with KMS CMKs (SSE-KMS).
+
+## KMS
 
 - Data at rest == KMS, audit== KMS
 
@@ -213,7 +242,7 @@
 
       Add permission to the kms:GenerateDataKey action. This permission is required for buckets that use default encryption with a custom AWS KMS key.
 
-## 16. ECS
+## ECS
 
 - PortMapping be defined in _Task definition_ when launching containers in Amazon ECS
 
@@ -223,12 +252,12 @@
 
       random – Place tasks randomly.
 
-      spread – Place tasks evenly based on the specified value. Accepted values are attribute key-value pairs, instanceId, or host.
+      spread – Place tasks evenly based on the specified value. Accepted values are attribute key-value pairs(such as attribute:ecs.availability-zone to balance tasks across zones), instanceId, or host.
 
-## 17. X Ray
+## X Ray
 
 - Use annotations to record information on segments or subsegments that you want indexed for search.
 
-## 18. Amazon ElastiCache
+## Amazon ElastiCache
 
 - Lazy Loading, as its name implies, is a caching strategy that loads data into the cache only when necessary.
