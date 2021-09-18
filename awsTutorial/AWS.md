@@ -114,6 +114,8 @@
 
       – A request parameter-based Lambda authorizer (also called a REQUEST authorizer) receives the caller’s identity in a combination of headers, query string parameters, stageVariables, and $context variables
 
+      For WebSocket APIs, only request parameter-based authorizers are supported.
+
 ## Lambda
 
 - when your function returns an error, Lambda stops processing any data in the impacted shard and retries the entire batch of records. These records are continuously retried until they are successfully processed by Lambda or expired by the event source.
@@ -124,6 +126,8 @@
 - The default timeout for lambda is 3 seconds. The maximum allowed value is 900 seconds(15 min).
 
 - Create an event source mapping to tell Lambda to send records from your stream to a Lambda function. You can create multiple event source mappings to process the same data with multiple Lambda functions, or process items from multiple streams with a single function.
+
+- For Lambda functions that process Kinesis or DynamoDB streams, **the number of shards is the unit of concurrency**. If your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently. This is because Lambda processes each shard’s events in sequence.
 
 ## Elastic Beanstalk
 
@@ -142,7 +146,7 @@
 
 ## Kinesis
 
-- For Lambda functions that process Kinesis or DynamoDB streams, the number of shards is the unit of concurrency. If your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently. This is because Lambda processes each shard’s events in sequence.
+- Typically, when you use the KCL, you should ensure that the number of instances does not exceed the number of shards (except for failure standby purposes). Each shard is processed by exactly one KCL worker and has exactly one corresponding record processor, so you never need multiple instances to process one shard. However, one worker can process any number of shards, so it’s fine if the number of shards exceeds the number of instances.
 
 - You split shards to increase the capacity (and cost) of your stream. You merge shards to reduce the cost (and capacity) of your stream.
 
