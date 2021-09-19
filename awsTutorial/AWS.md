@@ -68,6 +68,8 @@
 
 - A projection expression is a string that identifies the attributes you want. To retrieve a single attribute, specify its name. For multiple attributes, the names must be comma-separated.
 
+- Set ScanIndexForward to False to reverse the order for Query(Not applicable for Scan operation)
+
 - ReturnConsumedCapacity: To return the number of write capacity units consumed by any of these operations, set the ReturnConsumedCapacity parameter to one of the following:
 
       TOTAL — returns the total number of write capacity units consumed.
@@ -172,7 +174,7 @@
 
 ## CodeCommit
 
-- With Git credentials, you generate a static user name and password in IAM. You then use these credentials for HTTPS connections with Git and any third-party tool that supports Git user name and password authentication. 
+- With Git credentials, you generate a static user name and password in IAM. You then use these credentials for HTTPS connections with Git and any third-party tool that supports Git user name and password authentication.
 - With SSH connections, you create public and private key files on your local machine that Git and CodeCommit use for SSH authentication. You associate the public key with your IAM user, and you store the private key on your local machine
 
 ## Codedeploy

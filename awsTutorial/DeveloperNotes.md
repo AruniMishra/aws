@@ -21,7 +21,7 @@
         requests.
 
     -   One read request unit represents one strongly consistent read
-        request, or two eventually consistent read requests, for an item
+        request, or two * eventually consistent read requests, for an item
         up to 4KB in size.
 
     -   You want to read 540 items of 6KB each every minute using strong
