@@ -200,6 +200,9 @@
 
 - Delay queues are similar to visibility timeouts because both features make messages unavailable to consumers for a specific period of time. The difference between the two is that, for delay queues, a message is hidden when it is first added to queue, whereas for visibility timeouts a message is hidden only after it is consumed from the queue.
 
+- To set delay seconds on individual messages, rather than on an entire queue, use **message timers** to allow Amazon SQS to use the message timer's DelaySeconds value instead of the delay queue's **DelaySeconds** value.
+  - FIFO queues don't support timers on individual messages.
+
 - Long polling helps reduce the cost of using Amazon SQS by eliminating the number of empty responses (when there are no messages available for a ReceiveMessage request) and false empty responses (when messages are available but aren’t included in a response). This type of polling is suitable if the new messages that are being added to the SQS queue arrive less frequently.
 
 ## AppSync
