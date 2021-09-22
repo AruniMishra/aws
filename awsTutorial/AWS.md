@@ -21,6 +21,8 @@
   - [ECS](#ecs)
   - [X Ray](#x-ray)
   - [Amazon ElastiCache](#amazon-elasticache)
+  - [Misc](#misc)
+    - [AWS Config](#aws-config)
 
 ## IAM
 
@@ -270,3 +272,9 @@
 ## Amazon ElastiCache
 
 - Lazy Loading, as its name implies, is a caching strategy that loads data into the cache only when necessary.
+
+## Misc
+
+### AWS Config
+
+- AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations.
