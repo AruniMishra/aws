@@ -41,6 +41,10 @@
 
 - a global secondary index (GSI) is primarily used if you want to query over the entire table, across all partitions. GSI only supports eventual consistency and not strong consistency.
 
+- Management:
+  - Local Secondary Indexes can only be created when you are creating the table, there is no way to add Local Secondary Index to an existing table, also once you create the index you cannot delete it.
+  - Global Secondary Indexes can be created when you create the table and added to an existing table, deleting an existing Global Secondary Index is also allowed.
+
 - Partition key of the Local Secondary Index must me the same as the one in a base table.
 
 - Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale.
@@ -52,6 +56,8 @@
 - DynamoDB optionally supports conditional writes for these operations. A conditional write succeeds only if the item attributes meet one or more expected conditions. Otherwise, it returns an error. Conditional writes are helpful in many situations. For example, you might want a PutItem operation to succeed only if there is not already an item with the same primary key. Or you could prevent an UpdateItem operation from modifying an item if one of its attributes has a certain value.
 
       Conditional writes are helpful in cases where multiple users attempt to modify the same item.
+
+- For Amazon DynamoDB, you can dynamically adjust provisioned throughput capacity in response to actual traffic patterns. This enables a table or a global secondary index to increase its provisioned read and write capacity to handle sudden increases in traffic without throttling.
 
 - RCU
 
@@ -185,7 +191,7 @@
 
 - CodeDeploy provides two deployment type options, in-place deployments and blue/green deployments.
   - In-place deployment
-    - Only deployments that use the EC2/On-Premises compute platform can use in-place deployments.
+    - Only deployments that use the EC2/On-Premises compute platform can use in-place deployments. (AWS Lambda compute platform deployments cannot use an in-place deployment type.)
   - Blue/green deployment
     - Blue/green on an EC2/On-Premises compute platform
     - Blue/green on an AWS Lambda compute platform.
@@ -242,7 +248,8 @@
 
       Client Managed Master Key => When the requirement is to maintain end-to-end encryption but the client wants full control of his/her security keys, then use Client Managed Master Key.
 
-- GenerateDataKey returns a plaintext and encrypted data key. Use the plain text key to encrypt the data then delete it
+- GenerateDataKey returns a plaintext copy of the data key along with the copy of the encrypted data key. Use the plain text key to encrypt the data then delete it.
+- Envelope encryption is the practice of encrypting plaintext data with a data key, and then encrypting the data key under another key. This top-level plaintext key encryption key is known as the master key
 
 - You can choose to have AWS KMS automatically rotate CMKs every year, provided that those keys were generated within AWS KMS HSMs. Automatic key rotation is not supported for imported keys, asymmetric keys, or keys generated in an AWS CloudHSM cluster using the AWS KMS custom key store feature. If you choose to import keys to AWS KMS or asymmetric keys or use a custom key store, you can manually rotate them by creating a new CMK and mapping an existing key alias from the old CMK to the new CMK.
 
