@@ -154,6 +154,8 @@
 
 - You split shards to increase the capacity (and cost) of your stream. You merge shards to reduce the cost (and capacity) of your stream.
 
+- A Kinesis data stream stores records from 24 hours by default, up to 168 hours
+
 - Data will be available within milliseconds to your Amazon Kinesis applications, and those applications will receive data records in the order they were generated.
 
 - You can also use metrics to determine which are your “hot” or “cold” shards, that is, shards that are receiving much more data, or much less data, than expected. You could then selectively split the hot shards to increase capacity for the hash keys that target those shards. Similarly, you could merge cold shards to make better use of their unused capacity.
