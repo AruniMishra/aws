@@ -31,11 +31,11 @@
   - Cognito user pool -> To change password
   - Identity pool -> To access AWS services
 
-- you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API
+- you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API. The GetSessionToken API returns a set of temporary credentials for an AWS account or IAM user
 
 ## DynamoDB
 
-- Enable DynamoDB Streams and set the value of StreamViewType to NEW_IMAGE. Use Kinesis Adapter in the application to consume streams from DynamoDB
+- Enable DynamoDB Streams and set the value of StreamViewType to NEW_IMAGE. Use **Kinesis Adapter** in the application to consume streams from DynamoDB
 
 - If you enable DynamoDB Streams on a table, you can associate the stream ARN with a Lambda function that you write. Immediately after an item in the table is modified, a new record appears in the table’s stream. AWS Lambda polls the stream and invokes your Lambda function synchronously when it detects new stream records.
 
@@ -261,6 +261,14 @@
 - An error occurred (AccessDenied) when calling the PutObject operation: Access Denied"
 
       Add permission to the kms:GenerateDataKey action. This permission is required for buckets that use default encryption with a custom AWS KMS key.
+
+- When using server-side encryption with customer-provided encryption keys (SSE-C), you must provide encryption key information using the following request headers:
+
+      x-amz-server-side-encryption-customer-algorithm – This header specifies the encryption algorithm. The header value must be “AES256”.
+
+      x-amz-server-side-encryption-customer-key – This header provides the 256-bit, base64-encoded encryption key for Amazon S3 to use to encrypt or decrypt your data.
+
+      x-amz-server-side-encryption-customer-key-MD5 – This header provides the base64-encoded 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
 
 ## ECS
 
