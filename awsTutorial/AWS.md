@@ -23,6 +23,8 @@
   - [Amazon ElastiCache](#amazon-elasticache)
   - [Misc](#misc)
     - [AWS Config](#aws-config)
+    - [Quicksight](#quicksight)
+    - [AWS Certificate Manager](#aws-certificate-manager)
 
 ## IAM
 
@@ -110,7 +112,7 @@
 
 - For the integration timeout, the range is from 50 milliseconds to 29 seconds for all integration types, including Lambda, Lambda proxy, HTTP, HTTP proxy, and AWS integrations. the underlying Lambda function has been running for more than 29 seconds causing the API Gateway request to time out.
 
-- The API Gateway automatically enabled throttling in peak times which caused the HTTP 504 errors is incorrect because a large number of incoming requests will most likely produce an HTTP 502 or 429 error but not a 504 error
+- **The API Gateway automatically enabled throttling in peak times which caused the HTTP 504 errors** is incorrect because a large number of incoming requests will most likely produce an HTTP 502 or 429 error but not a 504 error
 
 - you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API.
 
@@ -208,6 +210,8 @@
       However, if you used long polling, the *connection stays open* to SQS until a message has been found in SQS, or until the timeout (e.g. max 20s) is reached, e.g. If the message landed in the queue at 15s after the 1st LONG poll (0s), the message is returned to the client at 15s. If no message is received, the connection times out at 20s, and a new connection is established.
       (also, any timeout over 0s implies long polling)
 
+- The default visibility timeout for a message is 30 seconds. The maximum is 12 hours.
+
 - Unlike standard queues, FIFO queues don’t introduce duplicate messages. FIFO queues help you avoid sending duplicates to a queue. If you retry the SendMessage action within the 5-minute deduplication interval, Amazon SQS doesn’t introduce any duplicates into the queue.
 
 - Delay queues are similar to visibility timeouts because both features make messages unavailable to consumers for a specific period of time. The difference between the two is that, for delay queues, a message is hidden when it is first added to queue, whereas for visibility timeouts a message is hidden only after it is consumed from the queue.
@@ -272,6 +276,9 @@
 
       x-amz-server-side-encryption-customer-key-MD5 – This header provides the base64-encoded 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error.
 
+- The value of **AES256** is only applicable for SSE-S3 and SSE-C
+- the correct method to upload files in the S3 bucket with SSE-KMS encryption is to include the x-amz-server-side-encryption header with a value of **aws:kms** in your upload request
+
 ## ECS
 
 - PortMapping be defined in _Task definition_ when launching containers in Amazon ECS
@@ -298,4 +305,10 @@
 
 - AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources. Config continuously monitors and records your AWS resource configurations and allows you to automate the evaluation of recorded configurations against desired configurations.
 
+### Quicksight
+
 - Quicksight services should you use to build visualizations, get business insights, and continuously analyze your data
+
+### AWS Certificate Manager
+
+- Although you can upload certificates to CloudFront, it doesn’t mean that you can import third-party SSL certificates on it. If you got your certificate from a third-party CA then you have to import the certificate into ACM or upload it to the IAM certificate store first. You would also not be able to export the certificate that you have loaded in CloudFront nor assign them to your EC2 or ELB instances as it would be tied to a single CloudFront distribution
