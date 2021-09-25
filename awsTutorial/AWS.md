@@ -139,6 +139,8 @@
 
 - For Lambda functions that process Kinesis or DynamoDB streams, **the number of shards is the unit of concurrency**. If your stream has 100 active shards, there will be at most 100 Lambda function invocations running concurrently. This is because Lambda processes each shard’s events in sequence.
 
+- A function can use up to 5 layers at a time.
+
 ## Elastic Beanstalk
 
 - configuration files are YAML- or JSON-formatted documents with a .config file extension that you place in a folder named .ebextensions and deploy in your application source bundle-as the healthcheckurl.yaml file should be renamed to healthcheckurl.config file and placed in the .ebextensions directory to be picked up by Elastic Beanstalk.
