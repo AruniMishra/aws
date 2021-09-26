@@ -100,7 +100,7 @@
 
 ## API Gateway
 
-- Use the GetTraceSummaries API to get the list of trace IDs of the application and then retrieve the list of traces using BatchGetTraces API.
+- Use the **GetTraceSummaries** API to get the list of trace IDs of the application and then retrieve the list of traces using **BatchGetTraces** API.
 
 - Using stage variables that can be configured, an API deployment stage can interact with different backend endpoints. Users can use API Gateway stage variables to reference a single AWS Lambda function with multiple versions and aliases
 
