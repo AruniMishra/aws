@@ -25,6 +25,7 @@
     - [AWS Config](#aws-config)
     - [Quicksight](#quicksight)
     - [AWS Certificate Manager](#aws-certificate-manager)
+    - [SWF](#swf)
 
 ## IAM
 
@@ -99,8 +100,6 @@
 - Use AWS Cognito Identity Pools then enable access to unauthenticated identities.
 
 ## API Gateway
-
-- Use the **GetTraceSummaries** API to get the list of trace IDs of the application and then retrieve the list of traces using **BatchGetTraces** API.
 
 - Using stage variables that can be configured, an API deployment stage can interact with different backend endpoints. Users can use API Gateway stage variables to reference a single AWS Lambda function with multiple versions and aliases
 
@@ -297,7 +296,17 @@
 
 ## X Ray
 
+- Use the **GetTraceSummaries** API to get the list of trace IDs and annotations of the application and then retrieve the list of traces using **BatchGetTraces** API.
+  - Use filter expressions via the X-Ray console in order to identify and filter out specific data from the trace.
+
+- Annotations are simple key-value pairs that are indexed for use with filter expressions. Use annotations to record data that you want to use to group traces in the console, or when calling the GetTraceSummaries API. X-Ray indexes up to 50 annotations per trace.
 - Use annotations to record information on segments or subsegments that you want indexed for search.
+
+- Use X-Ray SDK to generate segment documents with subsegments and send them to the X-Ray daemon, which will buffer them and upload to the X-Ray API in batches
+
+- A segment document can be up to 64 kB and contain a whole segment with subsegments, a fragment of a segment that indicates that a request is in progress, or a single subsegment that is sent separately. You can send segment documents directly to X-Ray by using the **PutTraceSegments** API. An alternative is, instead of sending segment documents to the X-Ray API, you can send segments and subsegments to an X-Ray daemon, which will buffer them and upload to the X-Ray API in batches. The X-Ray SDK sends segment documents to the daemon to avoid making calls to AWS directly
+
+- A trace segment is a JSON representation of a request that your application serves. A trace segment records information about the original request, information about the work that your application does locally, and subsegments with information about downstream calls that your application makes to AWS resources, HTTP APIs, and SQL databases.
 
 ## Amazon ElastiCache
 
@@ -316,3 +325,13 @@
 ### AWS Certificate Manager
 
 - Although you can upload certificates to CloudFront, it doesn’t mean that you can import third-party SSL certificates on it. If you got your certificate from a third-party CA then you have to import the certificate into ACM or upload it to the IAM certificate store first. You would also not be able to export the certificate that you have loaded in CloudFront nor assign them to your EC2 or ELB instances as it would be tied to a single CloudFront distribution
+
+### SWF
+
+- You can use **markers** to record events in the workflow execution history for application specific purposes. Markers are useful when you want to record custom information to help implement decider logic. For example, you could use a marker to count the number of loops in a recursive workflow.
+
+- Using **Signals** just enables you to inject information into a running workflow execution.
+
+- Using **Timers** just enables you to notify your decider when a certain amount of time has elapsed.
+
+- Likewise, using **Tags** just enables you to filter the listing of the executions when you use the visibility operations.
