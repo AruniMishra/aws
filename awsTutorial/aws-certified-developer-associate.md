@@ -1,6 +1,6 @@
-# AWS Cheat sheet
+# aws-certified-developer-associate Cheat sheet
 
-- [AWS Cheat sheet](#aws-cheat-sheet)
+- [aws-certified-developer-associate Cheat sheet](#aws-certified-developer-associate-cheat-sheet)
   - [IAM](#iam)
   - [DynamoDB](#dynamodb)
   - [VPC](#vpc)
@@ -26,6 +26,7 @@
     - [Quicksight](#quicksight)
     - [AWS Certificate Manager](#aws-certificate-manager)
     - [SWF](#swf)
+    - [Additional Point](#additional-point)
 
 ## IAM
 
@@ -37,6 +38,8 @@
 - you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API. The GetSessionToken API returns a set of temporary credentials for an AWS account or IAM user
 
 ## DynamoDB
+
+- The maximum item size in DynamoDB is 400 KB.
 
 - Enable DynamoDB Streams and set the value of StreamViewType to NEW_IMAGE. Use **Kinesis Adapter** in the application to consume streams from DynamoDB
 
@@ -89,6 +92,9 @@
 
       NONE — no write capacity details are returned. (This is the default.)
 
+- **TransactWriteItems** is a synchronous and idempotent write operation that groups up to 25 write actions in a single all-or-nothing operation.
+  - A TransactWriteItems operation differs from a BatchWriteItem operation in that all the actions it contains must be completed successfully, or no changes are made at all. With a BatchWriteItem operation, it is possible that only some of the actions in the batch succeed while the others do not.
+
 ## VPC
 
 - default route limit per VPC is 200.
@@ -111,7 +117,7 @@
 
 - For the integration timeout, the range is from 50 milliseconds to 29 seconds for all integration types, including Lambda, Lambda proxy, HTTP, HTTP proxy, and AWS integrations. the underlying Lambda function has been running for more than 29 seconds causing the API Gateway request to time out.
 
-- **The API Gateway automatically enabled throttling in peak times which caused the HTTP 504 errors** is incorrect because a large number of incoming requests will most likely produce an HTTP 502 or 429 error but not a 504 error
+- **The API Gateway automatically enabled throttling in peak times which caused the HTTP 504 errors is incorrect** because a large number of incoming requests will most likely produce an HTTP 502 or 429 error but not a 504 error
 
 - you use GetSessionToken if you want to use MFA to protect programmatic calls to specific AWS API.
 
@@ -302,7 +308,7 @@
 - Annotations are simple key-value pairs that are indexed for use with filter expressions. Use annotations to record data that you want to use to group traces in the console, or when calling the GetTraceSummaries API. X-Ray indexes up to 50 annotations per trace.
 - Use annotations to record information on segments or subsegments that you want indexed for search.
 
-- Use X-Ray SDK to generate segment documents with subsegments and send them to the X-Ray daemon, which will buffer them and upload to the X-Ray API in batches
+- Use X-Ray SDK to generate segment documents with subsegments and send them to the X-Ray daemon, which will buffer them and upload to the X-Ray API in batches- track including all the downstream calls made by the application to AWS resources
 
 - A segment document can be up to 64 kB and contain a whole segment with subsegments, a fragment of a segment that indicates that a request is in progress, or a single subsegment that is sent separately. You can send segment documents directly to X-Ray by using the **PutTraceSegments** API. An alternative is, instead of sending segment documents to the X-Ray API, you can send segments and subsegments to an X-Ray daemon, which will buffer them and upload to the X-Ray API in batches. The X-Ray SDK sends segment documents to the daemon to avoid making calls to AWS directly
 
@@ -335,3 +341,7 @@
 - Using **Timers** just enables you to notify your decider when a certain amount of time has elapsed.
 
 - Likewise, using **Tags** just enables you to filter the listing of the executions when you use the visibility operations.
+
+### Additional Point
+
+- To configure an Application Load Balancer as a function trigger, grant Elastic Load Balancing permission to run the function, create a target group that routes requests to the function, and add a rule to the load balancer that sends requests to the target group.
